@@ -304,9 +304,14 @@
       const rect = slider.getBoundingClientRect();
       let pct = (clientX - rect.left) / rect.width;
       pct = Math.max(0.04, Math.min(0.96, pct));
-      afterWrap.style.width = pct * 100 + "%";
-      handle.style.left     = pct * 100 + "%";
+      // clip-path: After image (right side) revealed as handle moves right
+      // inset(top right bottom left): clip left portion = hide left of handle, show After on right
+      afterWrap.style.clipPath = `inset(0 0 0 ${pct * 100}%)`;
+      handle.style.left        = pct * 100 + "%";
     };
+    // Set initial position to 50%
+    afterWrap.style.clipPath = "inset(0 0 0 50%)";
+    handle.style.left = "50%";
 
     slider.addEventListener("mousedown",  (e) => { dragging = true; setPos(e.clientX); e.preventDefault(); });
     window.addEventListener("mousemove",  (e) => { if (dragging) setPos(e.clientX); });
@@ -434,6 +439,8 @@
       "social-h2":           "See more transformations on Instagram",
       "social-sub":          "Before & afters, patient results, and clinic updates — all on Instagram.",
       "social-btn":          "Follow on Instagram",
+      "social-btn-ig":       "Follow on Instagram",
+      "social-btn-fb":       "Follow on Facebook",
       "final-h2":            "Ready to Book?",
       "final-p":             "Same-day emergency slots available.",
       "final-call":          "Call 079 745 7455",
@@ -445,9 +452,18 @@
       "footer-call":         "📞 Call 0797457455",
       "footer-wa":           "💬 WhatsApp booking",
       "footer-ig":           "📸 Instagram",
+      "footer-fb":           "📘 Facebook",
       "footer-links":        "Quick links",
       "footer-copy":         "© 2026 Dr Mohammed Rahhal Dental Clinic · All rights reserved",
       "mobile-call":         "📞 Call the Clinic Now",
+      "mobile-call-call":    "Call Now",
+      "mobile-call-wa":      "WhatsApp",
+      "stat-rating":         "Google Rating",
+      "stat-reviews":        "Verified Reviews",
+      "stat-spec-num":       "Specialist",
+      "stat-spec-label":     "Endodontist",
+      "stat-same-num":       "Same Day",
+      "stat-same-label":     "Emergency Slots",
       "lang-btn":            "عربي",
     },
     ar: {
@@ -506,8 +522,8 @@
       "s1-h3":               "علاج قناة الجذر",
       "s1-desc":             "تقنيات تحكم في الألم وعلاج جذور حديث للأسنان أحادية ومتعددة الجذور. رعاية متخصصة في كل خطوة.",
       "s1-li1":              "إعادة علاج الحالات المعقدة",
-      "s1-li2":              "وضع وإصلاح سدادة MTA",
-      "s1-li3":              "علاج الجذور التجديدي وإدارة الصدمات",
+      "s1-li2":              "إصلاح الانثقابات باستعمال الـ MTA",
+      "s1-li3":              "إدارة رضوض الأسنان",
       "s1-li4":              "جراحة قمة الجذر وإعادة الزراعة المتعمدة",
       "s2-h3":               "التيجان والترميم",
       "s2-desc":             "تيجان متينة وذات مظهر طبيعي مصممة لحماية سنّك واستعادته بعد العلاج.",
@@ -559,6 +575,8 @@
       "social-h2":           "شاهد المزيد من التحولات على انستغرام",
       "social-sub":          "نتائج قبل وبعد، نتائج المرضى، وتحديثات العيادة — كل شيء على انستغرام.",
       "social-btn":          "تابعنا على انستغرام",
+      "social-btn-ig":       "تابعنا على انستغرام",
+      "social-btn-fb":       "تابعنا على فيسبوك",
       "final-h2":            "هل أنت مستعد للحجز؟",
       "final-p":             "مواعيد الطوارئ متاحة في نفس اليوم.",
       "final-call":          "اتصل 079 745 7455",
@@ -570,9 +588,18 @@
       "footer-call":         "📞 اتصل 0797457455",
       "footer-wa":           "💬 حجز عبر واتساب",
       "footer-ig":           "📸 انستغرام",
+      "footer-fb":           "📘 فيسبوك",
       "footer-links":        "روابط سريعة",
       "footer-copy":         "© 2026 عيادة د. محمد رحّال للأسنان · جميع الحقوق محفوظة",
       "mobile-call":         "📞 اتصل بالعيادة الآن",
+      "mobile-call-call":    "اتصل الآن",
+      "mobile-call-wa":      "واتساب",
+      "stat-rating":         "تقييم جوجل",
+      "stat-reviews":        "تقييم موثّق",
+      "stat-spec-num":       "أخصائي",
+      "stat-spec-label":     "علاج الجذور",
+      "stat-same-num":       "نفس اليوم",
+      "stat-same-label":     "مواعيد الطوارئ",
       "lang-btn":            "EN",
     },
   };
