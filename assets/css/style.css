@@ -605,56 +605,67 @@ a.trust-item:hover {
 .avatar-name { font-weight: 600; display: block; font-size: .9rem; }
 .avatar-sub  { font-size: .78rem; opacity: .65; }
 
-/* ── SERVICES — differentiated ───────────────────────────── */
+/* ── SERVICES — 3+2 card grid ─────────────────────────────── */
 .service-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 22px;
   margin-bottom: 32px;
 }
+
 .service {
   border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 32px 28px;
-  background: #fff; box-shadow: var(--shadow-sm);
-  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-  display: flex; flex-direction: column; gap: 0;
-  position: relative; overflow: hidden;
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column;
+  transition: transform var(--transition), box-shadow var(--transition);
 }
-/* each service gets a unique bottom accent bar */
+.service:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0,0,0,.13);
+}
+
+/* unique bottom accent per card */
 .service:nth-child(1) { border-bottom: 3px solid var(--green); }
 .service:nth-child(2) { border-bottom: 3px solid var(--gold); }
 .service:nth-child(3) { border-bottom: 3px solid var(--green2); }
+.service:nth-child(4) { border-bottom: 3px solid var(--gold); }
+.service:nth-child(5) { border-bottom: 3px solid var(--green); }
 
-.service:hover {
-  transform: translateY(-7px);
-  box-shadow: 0 22px 54px rgba(0,0,0,.14);
-}
 .service-icon {
-  margin-bottom: 16px;
   width: 56px; height: 56px;
-  background: var(--green-lt); border-radius: 14px;
+  background: var(--green-lt);
+  border-radius: 14px;
   display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
   transition: background .25s;
 }
-.service:nth-child(2) .service-icon { background: rgba(197,160,89,.12); }
+.service:nth-child(2) .service-icon,
+.service:nth-child(4) .service-icon { background: rgba(197,160,89,.12); }
 .service:nth-child(3) .service-icon { background: rgba(18,72,54,.08); }
-
 .service:hover .service-icon { background: var(--green); }
+.service-icon .material-symbols-outlined { font-size: 28px; color: var(--gold); }
 .service:hover .service-icon .material-symbols-outlined { color: #fff; }
 
-.service h3 { font-size: 1.3rem; color: var(--green); line-height: 1.2; margin-bottom: 10px; }
+.service h3 {
+  font-size: 1.2rem; color: var(--green);
+  line-height: 1.2; margin-bottom: 10px;
+}
 .service-desc {
-  color: var(--muted); font-size: .93rem; line-height: 1.68;
+  color: var(--muted); font-size: .92rem; line-height: 1.7;
   margin-bottom: 18px; padding-bottom: 18px;
   border-bottom: 1px solid var(--border);
 }
 .service ul { list-style: none; display: grid; gap: 10px; }
 .service li {
-  color: var(--muted); padding-left: 22px; position: relative; font-size: .93rem;
+  color: var(--muted); font-size: .92rem;
+  padding-left: 22px; position: relative;
 }
 .service li::before {
   content: '';
-  position: absolute; left: 0; top: .62em;
+  position: absolute; left: 0; top: .6em;
   width: 8px; height: 8px;
   border-radius: 999px; background: var(--gold); opacity: .85;
 }
@@ -1147,7 +1158,11 @@ a.trust-item:hover {
 
   /* 3-col grids */
   .grid-3 { grid-template-columns: repeat(3, 1fr); }
-  .service-grid { grid-template-columns: repeat(3, 1fr); }
+  /* 5-card service: 6-col base, each card spans 2 → row1: 3 cards, row2: 2 centered */
+  .service-grid { grid-template-columns: repeat(6, 1fr); }
+  .service-grid .service { grid-column: span 2; }
+  .service-grid .service:nth-child(4) { grid-column: 2 / span 2; }
+  .service-grid .service:nth-child(5) { grid-column: 4 / span 2; }
 
   /* Gallery taller */
   .shot img { height: 420px; }
@@ -1208,7 +1223,7 @@ a.trust-item:hover {
   body { padding-bottom: 64px; }
   .mobile-call {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     position: fixed;
     bottom: 0; left: 0; right: 0;
     z-index: 1200;
